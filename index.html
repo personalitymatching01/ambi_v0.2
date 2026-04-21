@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Dating is broken. Let's fix it. — Dare to Date</title>
+  <meta name="description" content="No swiping. No paying to be seen. No ghosting. A new kind of dating built on who you really are. Take the 10-minute personality questionnaire.">
+  <meta property="og:title" content="Dating is broken. Let's fix it.">
+  <meta property="og:description" content="Personality-first matching. No swiping, no pay-to-win. Take the 10-min questionnaire.">
+  <meta name="theme-color" content="#0D313A">
+
+  <!-- =====================================================
+       BEFORE GOING LIVE — replace both placeholder URLs:
+       EN:  YOUR_EN_TALLY_LINK_HERE  →  https://tally.so/r/XXXXXX
+       ITA: YOUR_IT_TALLY_LINK_HERE  →  https://tally.so/r/YYYYYY
+       ===================================================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── DESIGN TOKENS ─── */
+    :root {
+      --navy:  #0D313A;   /* deep navy teal  — backgrounds      */
+      --teal:  #0E8992;   /* rich sea teal   — primary brand    */
+      --mteal: #8CB6BC;   /* muted teal      — secondary text   */
+      --terra: #E9A27C;   /* terracotta sand — warm accent      */
+      --peach: #E7BBA6;   /* blush peach     — light surfaces   */
+      --cream: #FAF7F2;   /* off-white       — primary text     */
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; text-decoration: none; }
+    strong { font-weight: 600; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible   { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.10s; }
+    .d2 { transition-delay: 0.20s; }
+    .d3 { transition-delay: 0.30s; }
+    .d4 { transition-delay: 0.45s; }
+
+    /* ─── STICKY CTA BAR ─── */
+    #stickyBar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--cream);
+      padding: 10px 16px env(safe-area-inset-bottom, 0px);
+      display: flex;
+      gap: 10px;
+      box-shadow: 0 -6px 32px rgba(0,0,0,.28);
+      transform: translateY(100%);
+      transition: transform .4s cubic-bezier(.16,1,.3,1);
+    }
+    #stickyBar.show { transform: translateY(0); }
+    .sb-btn {
+      flex: 1;
+      padding: 15px 8px;
+      border: none; border-radius: 8px;
+      font-family: 'Anton', sans-serif;
+      font-size: 15px; letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      transition: transform .12s, box-shadow .12s;
+    }
+    .sb-btn:active { transform: scale(.97); }
+    .sb-btn.en { background: var(--teal); color: var(--cream); }
+    .sb-btn.it { background: var(--navy); color: var(--cream); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, rgba(13,49,58,.92) 0%, transparent 100%);
+      backdrop-filter: blur(2px);
+    }
+    .logo {
+      font-family: 'Anton', sans-serif;
+      font-size: 19px; letter-spacing: .06em;
+      color: var(--cream);
+    }
+    .logo em { color: var(--terra); font-style: normal; }
+    .nav-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: .18em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--mteal);
+      padding: 5px 12px; border-radius: 20px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 110px 24px 90px;
+      position: relative; overflow: hidden;
+    }
+    /* background glows */
+    .hero::before {
+      content: '';
+      position: absolute; top: -25%; right: -15%;
+      width: 75vw; height: 75vw;
+      max-width: 520px; max-height: 520px;
+      background: radial-gradient(circle, rgba(14,137,146,.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -20%; left: -15%;
+      width: 65vw; height: 65vw;
+      max-width: 420px; max-height: 420px;
+      background: radial-gradient(circle, rgba(233,162,124,.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 22px;
+      display: flex; align-items: center; gap: 9px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--terra);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.25; } }
+
+    .hero-headline {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(58px, 15vw, 110px);
+      line-height: .88;
+      letter-spacing: -.01em;
+      margin-bottom: 28px;
+      position: relative; z-index: 1;
+    }
+    .hero-headline .accent  { color: var(--terra); }
+    .hero-headline .outline {
+      -webkit-text-stroke: 2px var(--cream);
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 17px; line-height: 1.65;
+      color: var(--mteal);
+      max-width: 370px; margin-bottom: 40px;
+      position: relative; z-index: 1;
+    }
+    .hero-sub strong { color: var(--cream); }
+
+    /* CTA group */
+    .hero-cta {
+      display: flex; flex-direction: column; gap: 12px;
+      max-width: 380px;
+      position: relative; z-index: 1;
+    }
+    .btn-primary {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 19px 28px;
+      background: var(--terra); color: var(--navy);
+      border: none; border-radius: 10px;
+      font-family: 'Anton', sans-serif;
+      font-size: 20px; letter-spacing: .05em; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 5px 24px rgba(233,162,124,.38);
+    }
+    .btn-primary:hover  { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(233,162,124,.48); }
+    .btn-primary:active { transform: scale(.98); }
+    .btn-secondary {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 17px 28px;
+      background: transparent; color: var(--cream);
+      border: 1.5px solid rgba(255,255,255,.22); border-radius: 10px;
+      font-family: 'Anton', sans-serif;
+      font-size: 20px; letter-spacing: .05em; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-secondary:hover { border-color: var(--mteal); background: rgba(140,182,188,.08); }
+    .btn-flag { font-size: 20px; line-height: 1; }
+
+    /* quick stats strip */
+    .hero-stats {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      margin-top: 44px;
+      position: relative; z-index: 1;
+    }
+    .stat { display: flex; flex-direction: column; gap: 3px; }
+    .stat-num {
+      font-family: 'Anton', sans-serif; font-size: 26px; line-height: 1;
+      color: var(--cream);
+    }
+    .stat-label {
+      font-family: 'Space Mono', monospace; font-size: 9px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--mteal);
+    }
+    .stat-sep { width: 1px; height: 36px; background: rgba(255,255,255,.15); }
+
+    /* scroll cue */
+    .scroll-cue {
+      position: absolute; bottom: 30px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(255,255,255,.25);
+      animation: bounce 2.2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+    .scroll-cue svg { width: 14px; height: 14px; }
+
+    /* ─── SECTION SKELETON ─── */
+    section { padding: 88px 24px; }
+    .section-inner { max-width: 640px; }
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--terra); margin-bottom: 18px;
+    }
+    .section-label::before { content: '— '; }
+
+    /* ─── PROBLEM ─── */
+    .problem { background: rgba(0,0,0,.22); }
+    .problem-headline {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(38px, 10vw, 72px);
+      line-height: .9; letter-spacing: -.01em;
+      margin-bottom: 44px;
+    }
+
+    /* animated strikethrough list */
+    .strike-list { margin-bottom: 40px; }
+    .si {
+      display: flex; align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(30px, 8vw, 52px);
+      letter-spacing: .025em;
+      color: rgba(255,255,255,.32);
+      position: relative; overflow: hidden;
+      cursor: default;
+    }
+    /* the strike line */
+    .si::after {
+      content: '';
+      position: absolute; left: 0; top: 50%;
+      transform: translateY(-50%);
+      height: 3.5px; width: 0%;
+      background: var(--terra);
+      border-radius: 2px;
+      transition: width .55s cubic-bezier(.16,1,.3,1);
+    }
+    .si.struck::after { width: 100%; }
+    .si-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px; font-weight: 400; line-height: 1.35;
+      color: rgba(255,255,255,.28);
+      margin-left: auto; text-align: right;
+      max-width: 150px; flex-shrink: 0;
+      padding-left: 12px;
+    }
+
+    .problem-quote {
+      background: rgba(233,162,124,.09);
+      border-left: 3px solid var(--terra);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 22px;
+      font-size: 15px; line-height: 1.68;
+      color: var(--peach);
+      font-style: italic;
+    }
+
+    /* ─── SOLUTION ─── */
+    .solution-headline {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(38px, 10vw, 72px);
+      line-height: .9; letter-spacing: -.01em;
+      margin-bottom: 16px;
+    }
+    .solution-headline .teal { color: var(--teal); }
+    .solution-sub {
+      font-size: 17px; line-height: 1.65; color: var(--mteal);
+      max-width: 440px; margin-bottom: 44px;
+    }
+
+    /* pillar cards */
+    .pillars { display: flex; flex-direction: column; gap: 14px; }
+    .pillar {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 24px 20px;
+      display: flex; gap: 18px; align-items: flex-start;
+      transition: border-color .3s, background .3s;
+    }
+    .pillar:hover {
+      border-color: rgba(14,137,146,.4);
+      background: rgba(14,137,146,.06);
+    }
+    .pillar-icon { font-size: 28px; flex-shrink: 0; width: 36px; text-align: center; line-height: 1.1; }
+    .pillar-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 17px; letter-spacing: .03em;
+      margin-bottom: 5px;
+    }
+    .pillar-desc { font-size: 14px; line-height: 1.55; color: var(--mteal); }
+
+    /* ─── HOW IT WORKS ─── */
+    .how { background: var(--teal); }
+    .how .section-label { color: rgba(13,49,58,.6); }
+    .how-headline {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(38px, 10vw, 72px);
+      line-height: .9; letter-spacing: -.01em;
+      color: var(--navy); margin-bottom: 48px;
+    }
+    .steps { display: flex; flex-direction: column; }
+    .step {
+      display: flex; gap: 20px;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(13,49,58,.18);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      font-family: 'Anton', sans-serif; font-size: 52px;
+      color: rgba(13,49,58,.18); line-height: 1;
+      flex-shrink: 0; width: 58px;
+      padding-top: 3px;
+    }
+    .step-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 22px; letter-spacing: .03em;
+      color: var(--navy); margin-bottom: 7px;
+    }
+    .step-desc { font-size: 15px; line-height: 1.58; color: rgba(13,49,58,.72); }
+    .step-chip {
+      display: inline-block; margin-top: 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: .13em; text-transform: uppercase;
+      background: rgba(13,49,58,.12); color: var(--navy);
+      padding: 4px 11px; border-radius: 20px;
+    }
+
+    /* ─── WHY NOW ─── */
+    .why-headline {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(38px, 10vw, 72px);
+      line-height: .9; letter-spacing: -.01em;
+      margin-bottom: 36px;
+    }
+
+    .transparency-box {
+      background: rgba(14,137,146,.09);
+      border: 1px solid rgba(14,137,146,.24);
+      border-radius: 14px;
+      padding: 28px 24px;
+      margin-bottom: 36px;
+    }
+    .transparency-box h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 14px;
+    }
+    .transparency-box p {
+      font-size: 15px; line-height: 1.67; color: var(--mteal);
+    }
+    .transparency-box p + p { margin-top: 12px; }
+    .transparency-box strong { color: var(--cream); }
+
+    /* fact grid */
+    .facts {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .fact {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px; padding: 18px 16px;
+    }
+    .fact-icon { font-size: 22px; margin-bottom: 9px; }
+    .fact-title {
+      font-family: 'Anton', sans-serif; font-size: 15px;
+      color: var(--cream); margin-bottom: 4px;
+    }
+    .fact-desc { font-size: 12px; line-height: 1.42; color: var(--mteal); }
+
+    /* ─── FINAL CTA ─── */
+    .cta-section {
+      background: linear-gradient(155deg, rgba(14,137,146,.14) 0%, var(--navy) 55%);
+      text-align: center;
+      padding: 88px 24px 140px;
+    }
+    .cta-section .section-label { color: var(--terra); }
+    .cta-headline {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(46px, 12vw, 90px);
+      line-height: .88; letter-spacing: -.01em;
+      margin-bottom: 18px;
+    }
+    .cta-headline .terra { color: var(--terra); }
+    .cta-sub {
+      font-size: 16px; color: var(--mteal); line-height: 1.58;
+      max-width: 340px; margin: 0 auto 48px;
+    }
+    .cta-buttons {
+      display: flex; flex-direction: column; gap: 14px;
+      max-width: 380px; margin: 0 auto;
+    }
+    .cta-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--mteal);
+      background: rgba(140,182,188,.1);
+      border: 1px solid rgba(140,182,188,.2);
+      padding: 7px 16px; border-radius: 20px;
+      margin-top: 22px;
+    }
+    .cta-btn-it {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      flex: 1; padding: 17px 28px;
+      border: 1.5px solid var(--terra); border-radius: 10px;
+      font-family: 'Anton', sans-serif;
+      font-size: 20px; letter-spacing: .05em; text-transform: uppercase;
+      color: var(--terra); background: transparent;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .cta-btn-it:hover { background: rgba(233,162,124,.1); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 28px 24px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      text-align: center;
+    }
+    footer p {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,.2); line-height: 1.8;
+    }
+    footer a { color: var(--mteal); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (min-width: 600px) {
+      nav  { padding: 22px 48px; }
+      section { padding: 100px 48px; }
+      .hero-cta { flex-direction: row; }
+      .facts { grid-template-columns: repeat(4, 1fr); }
+      .cta-buttons {
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .btn-primary { flex: 1; }
+      .cta-btn-it  { flex: 1; }
+    }
+
+    @media (min-width: 1024px) {
+      nav { padding: 26px 96px; }
+      section { padding: 120px 96px; }
+      .section-inner { max-width: 720px; }
+      .cta-section { padding: 120px 96px 180px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     STICKY CTA BAR (appears after hero scrolls away)
+     ═══════════════════════════════════════════ -->
+<div id="stickyBar">
+  <a href="YOUR_EN_TALLY_LINK_HERE" class="sb-btn en" target="_blank" rel="noopener noreferrer">
+    <span>🇬🇧</span> Take it in English
+  </a>
+  <a href="YOUR_IT_TALLY_LINK_HERE" class="sb-btn it" target="_blank" rel="noopener noreferrer">
+    <span>🇮🇹</span> Fallo in italiano
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+     ═══════════════════════════════════════════ -->
+<nav>
+  <div class="logo">DARE <em>TO</em> DATE</div>
+  <div class="nav-badge">Research · 2026</div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-eyebrow">Anti-swipe movement · 2026</div>
+
+  <h1 class="hero-headline">
+    YOUR<br>
+    <span class="outline">PHOTOS</span><br>
+    ARE NOT<br>
+    <span class="accent">YOU.</span>
+  </h1>
+
+  <p class="hero-sub">
+    We're building a dating app that matches people on personality.
+    Not looks. Not who paid more.
+    <strong>Who you actually are.</strong>
+  </p>
+
+  <div class="hero-cta">
+    <a href="YOUR_EN_TALLY_LINK_HERE" class="btn-primary" target="_blank" rel="noopener noreferrer">
+      <span class="btn-flag">🇬🇧</span> Take the questionnaire
+    </a>
+    <a href="YOUR_IT_TALLY_LINK_HERE" class="btn-secondary" target="_blank" rel="noopener noreferrer">
+      <span class="btn-flag">🇮🇹</span> In italiano
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">~10 min</span>
+      <span class="stat-label">to complete</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">anonymous</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <span class="stat-num">Free</span>
+      <span class="stat-label">always</span>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">
+    scroll
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 3v10M3 9l5 5 5-5"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PROBLEM
+     ═══════════════════════════════════════════ -->
+<section class="problem">
+  <div class="section-inner">
+    <div class="section-label reveal">The problem</div>
+    <h2 class="problem-headline reveal d1">
+      Dating apps<br>
+      are <span style="color:var(--terra)">broken.</span>
+    </h2>
+
+    <!-- animated strike-list -->
+    <div class="strike-list" id="strikeList">
+      <div class="si">
+        <span>SWIPING</span>
+        <span class="si-desc">judging a human in 0.3 seconds</span>
+      </div>
+      <div class="si">
+        <span>PAYING</span>
+        <span class="si-desc">roses, boosts, superlikes — pay to be seen</span>
+      </div>
+      <div class="si">
+        <span>POSING</span>
+        <span class="si-desc">curated photos over actual personality</span>
+      </div>
+      <div class="si">
+        <span>GHOSTING</span>
+        <span class="si-desc">conversations that vanish into silence</span>
+      </div>
+    </div>
+
+    <blockquote class="problem-quote reveal d2">
+      "The average dating app user spends 90 minutes a day swiping — and still feels more lonely than before they downloaded the app."
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SOLUTION
+     ═══════════════════════════════════════════ -->
+<section class="solution">
+  <div class="section-inner">
+    <div class="section-label reveal">Our answer</div>
+    <h2 class="solution-headline reveal d1">
+      Match on<br>
+      <span class="teal">who you are.</span><br>
+      Not what you look like.
+    </h2>
+    <p class="solution-sub reveal d2">
+      We built a personality assessment that identifies how you think, how you love, and what you need in a partner. Then we do the matching — algorithmically, without photos, without paid placement.
+    </p>
+
+    <div class="pillars">
+      <div class="pillar reveal d1">
+        <div class="pillar-icon">🧠</div>
+        <div>
+          <div class="pillar-title">Who you are, alone</div>
+          <div class="pillar-desc">Your core personality traits — how you process the world, make decisions, and handle ambiguity under pressure.</div>
+        </div>
+      </div>
+      <div class="pillar reveal d2">
+        <div class="pillar-icon">💬</div>
+        <div>
+          <div class="pillar-title">Who you are in relationships</div>
+          <div class="pillar-desc">Your attachment style, communication patterns, and how you show up for people you genuinely care about.</div>
+        </div>
+      </div>
+      <div class="pillar reveal d3">
+        <div class="pillar-icon">🌿</div>
+        <div>
+          <div class="pillar-title">What you actually love</div>
+          <div class="pillar-desc">Your passions, interests, and the things that make you light up — the stuff you'd actually talk about on a first date.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     HOW IT WORKS
+     ═══════════════════════════════════════════ -->
+<section class="how">
+  <div class="section-inner">
+    <div class="section-label reveal">How it works</div>
+    <h2 class="how-headline reveal d1">Three steps.<br>One real date.</h2>
+
+    <div class="steps">
+      <div class="step reveal d1">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">You take the questionnaire</div>
+          <div class="step-desc">A 10–15 minute personality assessment. No photo required. No social profiles. No judgement. Just honest answers about who you are.</div>
+          <span class="step-chip">~10 min · completely anonymous</span>
+        </div>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">We find your real matches</div>
+          <div class="step-desc">Our algorithm identifies compatibility based purely on your results — not your profile photo. Couples who actually work, not just couples who photograph well.</div>
+          <span class="step-chip">personality-based · no pay-to-win</span>
+        </div>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">We arrange the first date</div>
+          <div class="step-desc">No painful chat loops. No flaking. We handle the logistics — booking a table at a venue nearby. You just show up and be yourself.</div>
+          <span class="step-chip">real venue · no ghosting trap</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     WHY NOW / TRANSPARENCY
+     ═══════════════════════════════════════════ -->
+<section class="why">
+  <div class="section-inner">
+    <div class="section-label reveal">Why now</div>
+    <h2 class="why-headline reveal d1">
+      You're<br>
+      <span style="color:var(--terra)">shaping</span><br>
+      what comes next.
+    </h2>
+
+    <div class="transparency-box reveal d2">
+      <h3>Full transparency</h3>
+      <p>We're in the <strong>research phase</strong>. There is no app yet. No subscription, no ads, no tricks — zero.</p>
+      <p>We're collecting personality questionnaires to build the data foundation that will power our matching algorithm. <strong>Your answers directly determine how the matching works.</strong></p>
+      <p>When we launch, everyone who participated gets <strong>early access</strong> — and their personality profile is already in the system.</p>
+    </div>
+
+    <div class="facts">
+      <div class="fact reveal d1">
+        <div class="fact-icon">🔒</div>
+        <div class="fact-title">Anonymous</div>
+        <div class="fact-desc">No name or photo required to take part</div>
+      </div>
+      <div class="fact reveal d2">
+        <div class="fact-icon">⚡</div>
+        <div class="fact-title">10 minutes</div>
+        <div class="fact-desc">That's genuinely all it takes</div>
+      </div>
+      <div class="fact reveal d3">
+        <div class="fact-icon">🚫</div>
+        <div class="fact-title">No spam</div>
+        <div class="fact-desc">Your results sent once. That's it.</div>
+      </div>
+      <div class="fact reveal d4">
+        <div class="fact-icon">🎯</div>
+        <div class="fact-title">Real impact</div>
+        <div class="fact-desc">You shape the algorithm — directly</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FINAL CTA
+     ═══════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="section-label reveal">Ready?</div>
+  <h2 class="cta-headline reveal d1">
+    10 minutes.<br>
+    <span class="terra">Your personality.</span><br>
+    A real match.
+  </h2>
+  <p class="cta-sub reveal d2">
+    Pick your language and take the questionnaire.
+    Anonymous. Free. About 10 minutes.
+  </p>
+
+  <div class="cta-buttons reveal d3">
+    <a href="YOUR_EN_TALLY_LINK_HERE" class="btn-primary" target="_blank" rel="noopener noreferrer">
+      <span class="btn-flag">🇬🇧</span> English
+    </a>
+    <a href="YOUR_IT_TALLY_LINK_HERE" class="cta-btn-it" target="_blank" rel="noopener noreferrer">
+      <span class="btn-flag">🇮🇹</span> Italiano
+    </a>
+  </div>
+
+  <div style="text-align:center;" class="reveal d4">
+    <span class="cta-chip">⏱ 10 min &nbsp;·&nbsp; anonymous &nbsp;·&nbsp; free forever</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ -->
+<footer>
+  <p>
+    Dare to Date &nbsp;·&nbsp; Research Phase 2026<br>
+    Questions? <a href="mailto:personality.matching@gmail.com">personality.matching@gmail.com</a>
+  </p>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════ -->
+<script>
+  /* ── Scroll reveal ── */
+  const revealObs = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ── Strikethrough animation ── */
+  const strikeList = document.getElementById('strikeList');
+  if (strikeList) {
+    const strikeObs = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.si').forEach((item, i) => {
+            setTimeout(() => item.classList.add('struck'), i * 220 + 180);
+          });
+          strikeObs.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.25 }
+    );
+    strikeObs.observe(strikeList);
+  }
+
+  /* ── Sticky CTA bar: show once hero is out of view ── */
+  const hero    = document.getElementById('hero');
+  const stickyBar = document.getElementById('stickyBar');
+  if (hero && stickyBar) {
+    const heroObs = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        stickyBar.classList.toggle('show', !e.isIntersecting);
+      }),
+      { threshold: 0.08 }
+    );
+    heroObs.observe(hero);
+  }
+</script>
+</body>
+</html>
