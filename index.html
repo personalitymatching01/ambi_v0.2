@@ -457,6 +457,28 @@
     .ambi .section-sub { color: rgba(13,49,58,.68); }
     .ambi .section-sub strong { color: var(--navy); }
 
+    .ambi-ref {
+      font-size: 11px; line-height: 1.6;
+      color: rgba(13,49,58,.5);
+      margin-bottom: 32px;
+      padding-left: 12px;
+      border-left: 2px solid rgba(13,49,58,.2);
+    }
+    .ambi-ref-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(13,49,58,.4);
+      display: block; margin-bottom: 4px;
+    }
+    .ambi-ref em { font-style: italic; }
+    .ambi-ref a {
+      color: rgba(13,49,58,.65);
+      text-decoration: underline;
+      text-decoration-color: rgba(13,49,58,.25);
+      text-underline-offset: 2px;
+    }
+    .ambi-ref a:hover { color: var(--navy); text-decoration-color: var(--navy); }
+
     .ambi-dims {
       display: flex; flex-direction: column; gap: 14px;
       margin-bottom: 36px;
@@ -804,6 +826,13 @@
     <p class="section-sub reveal d2">
       The AMBI is a multi-dimensional personality inventory designed to go beneath the surface. Most personality tests tell you what type you are. AMBI maps <strong>how you work</strong> — alone, with others, and in the life you've built — so we can find someone who genuinely complements you.
     </p>
+
+    <div class="ambi-ref reveal d2">
+      <span class="ambi-ref-label">Scientific basis</span>
+      Yarkoni, T. (2010). The Abbreviation of Personality, or how to Measure 200 Personality Scales with 200 Items.
+      <em>Journal of Research in Personality, 44</em>(2), 180–198.
+      <a href="https://doi.org/10.1016/j.jrp.2010.01.002" target="_blank" rel="noopener noreferrer">doi.org/10.1016/j.jrp.2010.01.002</a>
+    </div>
 
     <div class="ambi-dims reveal d2">
       <div class="ambi-dim">
