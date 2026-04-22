@@ -3,87 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Dating is broken. Let's fix it. — Dare to Date</title>
-  <meta name="description" content="No swiping. No paying to be seen. No ghosting. A new kind of dating built on who you really are. Take the 10-minute personality questionnaire.">
-  <meta property="og:title" content="Dating is broken. Let's fix it.">
-  <meta property="og:description" content="Personality-first matching. No swiping, no pay-to-win. Take the 10-min questionnaire.">
+  <title>Take the test. Meet your matches. We'll set the table. — Zaphyr Project</title>
+  <meta name="description" content="Personality-first matching. You take the AMBI questionnaire, we find your most compatible matches, we arrange real first dates. No app. No swiping. Just connection.">
+  <meta property="og:title" content="Take the test. Meet your matches. We'll set the table.">
+  <meta property="og:description" content="Personality-first matching. Real dates, curated for you. — Zaphyr Project">
   <meta name="theme-color" content="#0D313A">
 
   <!-- =====================================================
-       BEFORE GOING LIVE — replace both placeholder URLs:
-       EN:  YOUR_EN_TALLY_LINK_HERE  →  https://forms.gle/9kgTMELcSCvf83f7A
-       ITA: YOUR_IT_TALLY_LINK_HERE  →  https://forms.gle/mfMW9vhQon4mBVNt8
+       BEFORE GOING LIVE — replace:
+       https://forms.gle/N6nrw7Vkoz6vjuh2A  →  https://tally.so/r/XXXXXX
        ===================================================== -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ─── DESIGN TOKENS ─── */
+    /* ─── TOKENS ─── */
     :root {
-      --navy:  #0D313A;   /* deep navy teal  — backgrounds      */
-      --teal:  #0E8992;   /* rich sea teal   — primary brand    */
-      --mteal: #8CB6BC;   /* muted teal      — secondary text   */
-      --terra: #E9A27C;   /* terracotta sand — warm accent      */
-      --peach: #E7BBA6;   /* blush peach     — light surfaces   */
-      --cream: #FAF7F2;   /* off-white       — primary text     */
+      --navy:  #0D313A;
+      --teal:  #0E8992;
+      --mteal: #8CB6BC;
+      --terra: #E9A27C;
+      --peach: #E7BBA6;
+      --cream: #FAF7F2;
     }
 
     /* ─── RESET ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: 'Inter', sans-serif;
       background: var(--navy);
       color: var(--cream);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
     a { color: inherit; text-decoration: none; }
-    strong { font-weight: 600; }
 
-    /* ─── SCROLL REVEAL ─── */
+    /* ─── REVEAL ─── */
     .reveal {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
     }
-    .reveal.visible   { opacity: 1; transform: none; }
-    .d1 { transition-delay: 0.10s; }
-    .d2 { transition-delay: 0.20s; }
-    .d3 { transition-delay: 0.30s; }
-    .d4 { transition-delay: 0.45s; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: .10s; }
+    .d2 { transition-delay: .22s; }
+    .d3 { transition-delay: .34s; }
+    .d4 { transition-delay: .46s; }
 
-    /* ─── STICKY CTA BAR ─── */
+    /* ─── STICKY BAR ─── */
     #stickyBar {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 200;
-      background: var(--cream);
-      padding: 10px 16px env(safe-area-inset-bottom, 0px);
-      display: flex;
-      gap: 10px;
-      box-shadow: 0 -6px 32px rgba(0,0,0,.28);
+      bottom: 0; left: 0; right: 0; z-index: 200;
+      background: var(--navy);
+      padding: 12px 16px env(safe-area-inset-bottom, 12px);
+      box-shadow: 0 -1px 0 rgba(255,255,255,.06), 0 -12px 40px rgba(0,0,0,.35);
       transform: translateY(100%);
       transition: transform .4s cubic-bezier(.16,1,.3,1);
     }
     #stickyBar.show { transform: translateY(0); }
     .sb-btn {
-      flex: 1;
-      padding: 15px 8px;
-      border: none; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      width: 100%; padding: 18px 28px;
+      border: none; border-radius: 100px;
+      background: linear-gradient(135deg, #EDB08E 0%, var(--terra) 45%, #C97A52 100%);
+      color: var(--navy);
       font-family: 'Anton', sans-serif;
-      font-size: 15px; letter-spacing: .06em;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 7px;
-      transition: transform .12s, box-shadow .12s;
+      font-size: 17px; letter-spacing: .06em; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      position: relative; overflow: hidden;
+      box-shadow: 0 6px 28px rgba(233,162,124,.40);
+      transition: transform .15s, box-shadow .15s;
+      animation: ctaGlow 3.5s ease-in-out infinite;
     }
+    /* reuse shimmer from btn-cta */
+    .sb-btn::before {
+      content: '';
+      position: absolute; top: 0; left: -120%;
+      width: 55%; height: 100%;
+      background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.25) 50%, transparent 70%);
+      transform: skewX(-12deg);
+      animation: btnShimmer 3.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .sb-btn:hover  { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(233,162,124,.55); }
     .sb-btn:active { transform: scale(.97); }
-    .sb-btn.en { background: var(--teal); color: var(--cream); }
-    .sb-btn.it { background: var(--navy); color: var(--cream); }
+    .sb-btn-text   { position: relative; z-index: 1; }
+    .sb-btn-arrow  {
+      position: relative; z-index: 1;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px;
+      background: rgba(13,49,58,.18); border-radius: 50%;
+      transition: transform .2s cubic-bezier(.16,1,.3,1);
+      flex-shrink: 0;
+    }
+    .sb-btn:hover .sb-btn-arrow { transform: translateX(4px); }
+    .sb-btn-arrow svg { width: 13px; height: 13px; }
 
     /* ─── NAV ─── */
     nav {
@@ -92,20 +109,18 @@
       padding: 18px 24px;
       display: flex; justify-content: space-between; align-items: center;
       background: linear-gradient(to bottom, rgba(13,49,58,.92) 0%, transparent 100%);
-      backdrop-filter: blur(2px);
+      backdrop-filter: blur(3px);
     }
     .logo {
       font-family: 'Anton', sans-serif;
       font-size: 19px; letter-spacing: .06em;
-      color: var(--cream);
     }
     .logo em { color: var(--terra); font-style: normal; }
     .nav-badge {
       font-family: 'Space Mono', monospace;
-      font-size: 9px; letter-spacing: .18em;
-      text-transform: uppercase;
+      font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
       background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.13);
       color: var(--mteal);
       padding: 5px 12px; border-radius: 20px;
     }
@@ -117,13 +132,12 @@
       padding: 110px 24px 90px;
       position: relative; overflow: hidden;
     }
-    /* background glows */
     .hero::before {
       content: '';
-      position: absolute; top: -25%; right: -15%;
-      width: 75vw; height: 75vw;
-      max-width: 520px; max-height: 520px;
-      background: radial-gradient(circle, rgba(14,137,146,.22) 0%, transparent 70%);
+      position: absolute; top: -20%; right: -10%;
+      width: 80vw; height: 80vw;
+      max-width: 560px; max-height: 560px;
+      background: radial-gradient(circle, rgba(14,137,146,.20) 0%, transparent 68%);
       pointer-events: none;
     }
     .hero::after {
@@ -131,108 +145,97 @@
       position: absolute; bottom: -20%; left: -15%;
       width: 65vw; height: 65vw;
       max-width: 420px; max-height: 420px;
-      background: radial-gradient(circle, rgba(233,162,124,.14) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(233,162,124,.13) 0%, transparent 68%);
       pointer-events: none;
     }
 
     .hero-eyebrow {
       font-family: 'Space Mono', monospace;
       font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
-      color: var(--terra);
-      margin-bottom: 22px;
+      color: var(--terra); margin-bottom: 24px;
       display: flex; align-items: center; gap: 9px;
     }
     .hero-eyebrow::before {
       content: '';
-      display: inline-block;
       width: 7px; height: 7px; border-radius: 50%;
-      background: var(--terra);
-      animation: pulse 2s infinite;
-      flex-shrink: 0;
+      background: var(--terra); flex-shrink: 0;
+      animation: pulse 2.2s infinite;
     }
-    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.25; } }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
 
     .hero-headline {
       font-family: 'Anton', sans-serif;
-      font-size: clamp(58px, 15vw, 110px);
-      line-height: .88;
-      letter-spacing: -.01em;
-      margin-bottom: 28px;
+      font-size: clamp(52px, 13vw, 104px);
+      line-height: .88; letter-spacing: -.015em;
+      margin-bottom: 30px;
       position: relative; z-index: 1;
     }
-    .hero-headline .accent  { color: var(--terra); }
+    .hero-headline .teal  { color: var(--teal); }
+    .hero-headline .terra { color: var(--terra); }
     .hero-headline .outline {
       -webkit-text-stroke: 2px var(--cream);
       color: transparent;
     }
 
     .hero-sub {
-      font-size: 17px; line-height: 1.65;
+      font-size: 17px; line-height: 1.68;
       color: var(--mteal);
-      max-width: 370px; margin-bottom: 40px;
+      max-width: 400px; margin-bottom: 44px;
       position: relative; z-index: 1;
     }
-    .hero-sub strong { color: var(--cream); }
+    .hero-sub strong { color: var(--cream); font-weight: 500; }
 
-    /* CTA group */
-    .hero-cta {
-      display: flex; flex-direction: column; gap: 12px;
-      max-width: 380px;
-      position: relative; z-index: 1;
-    }
+    .hero-cta { position: relative; z-index: 1; width: 100%; max-width: 400px; }
     .btn-primary {
       display: flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 19px 28px;
+      width: 100%; padding: 19px 28px;
       background: var(--terra); color: var(--navy);
       border: none; border-radius: 10px;
       font-family: 'Anton', sans-serif;
       font-size: 20px; letter-spacing: .05em; text-transform: uppercase;
       cursor: pointer; text-decoration: none;
       transition: transform .15s, box-shadow .15s;
-      box-shadow: 0 5px 24px rgba(233,162,124,.38);
+      box-shadow: 0 6px 28px rgba(233,162,124,.38);
     }
-    .btn-primary:hover  { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(233,162,124,.48); }
+    .btn-primary:hover  { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(233,162,124,.46); }
     .btn-primary:active { transform: scale(.98); }
-    .btn-secondary {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 17px 28px;
-      background: transparent; color: var(--cream);
-      border: 1.5px solid rgba(255,255,255,.22); border-radius: 10px;
-      font-family: 'Anton', sans-serif;
-      font-size: 20px; letter-spacing: .05em; text-transform: uppercase;
-      cursor: pointer; text-decoration: none;
-      transition: border-color .2s, background .2s;
-    }
-    .btn-secondary:hover { border-color: var(--mteal); background: rgba(140,182,188,.08); }
-    .btn-flag { font-size: 20px; line-height: 1; }
 
-    /* quick stats strip */
-    .hero-stats {
-      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
-      margin-top: 44px;
+    /* promise strip */
+    .promise-strip {
+      display: flex; align-items: flex-start; gap: 0;
+      margin-top: 52px;
       position: relative; z-index: 1;
+      max-width: 420px;
     }
-    .stat { display: flex; flex-direction: column; gap: 3px; }
-    .stat-num {
-      font-family: 'Anton', sans-serif; font-size: 26px; line-height: 1;
-      color: var(--cream);
+    .promise-item {
+      flex: 1;
+      display: flex; flex-direction: column; gap: 5px;
+      padding-right: 16px;
     }
-    .stat-label {
-      font-family: 'Space Mono', monospace; font-size: 9px;
-      letter-spacing: .16em; text-transform: uppercase;
-      color: var(--mteal);
+    .promise-item:not(:last-child) {
+      border-right: 1px solid rgba(255,255,255,.12);
+      margin-right: 16px;
     }
-    .stat-sep { width: 1px; height: 36px; background: rgba(255,255,255,.15); }
+    .promise-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--terra);
+    }
+    .promise-text {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(14px, 3.5vw, 18px);
+      line-height: 1.05; color: var(--cream);
+    }
 
     /* scroll cue */
     .scroll-cue {
-      position: absolute; bottom: 30px; left: 50%;
+      position: absolute; bottom: 28px; left: 50%;
       transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 5px;
       font-family: 'Space Mono', monospace;
       font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
-      color: rgba(255,255,255,.25);
-      animation: bounce 2.2s ease-in-out infinite;
+      color: rgba(255,255,255,.22);
+      animation: bounce 2.4s ease-in-out infinite;
     }
     @keyframes bounce {
       0%,100% { transform: translateX(-50%) translateY(0); }
@@ -240,325 +243,437 @@
     }
     .scroll-cue svg { width: 14px; height: 14px; }
 
-    /* ─── SECTION SKELETON ─── */
+    /* ─── SECTION BASE ─── */
     section { padding: 88px 24px; }
-    .section-inner { max-width: 640px; }
+    .section-inner { max-width: 660px; }
     .section-label {
       font-family: 'Space Mono', monospace;
       font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
       color: var(--terra); margin-bottom: 18px;
     }
     .section-label::before { content: '— '; }
-
-    /* ─── PROBLEM ─── */
-    .problem { background: rgba(0,0,0,.22); }
-    .problem-headline {
+    .section-headline {
       font-family: 'Anton', sans-serif;
       font-size: clamp(38px, 10vw, 72px);
       line-height: .9; letter-spacing: -.01em;
-      margin-bottom: 44px;
+      margin-bottom: 24px;
     }
+    .section-sub {
+      font-size: 17px; line-height: 1.68;
+      color: var(--mteal); margin-bottom: 40px;
+      max-width: 520px;
+    }
+    .section-sub strong { color: var(--cream); font-weight: 500; }
 
-    /* animated strikethrough list */
-    .strike-list { margin-bottom: 40px; }
+    /* ─── STRIKETHROUGH SECTION ─── */
+    .strike-section {
+      background: rgba(0,0,0,.18);
+      padding: 88px 24px;
+    }
+    .strike-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+      color: rgba(255,255,255,.3); margin-bottom: 40px;
+    }
+    .strike-label::before { content: '— '; }
+
+    .strike-list { display: flex; flex-direction: column; }
+
+    /* each row: word on top, aside below on mobile; side-by-side on desktop */
     .si {
-      display: flex; align-items: center;
-      padding: 18px 0;
-      border-bottom: 1px solid rgba(255,255,255,.07);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;   /* prevents word span from stretching full-width */
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    /* the big word — strike line lives here */
+    .si-word {
       font-family: 'Anton', sans-serif;
-      font-size: clamp(30px, 8vw, 52px);
-      letter-spacing: .025em;
-      color: rgba(255,255,255,.32);
-      position: relative; overflow: hidden;
-      cursor: default;
-    }
-    /* the strike line */
-    .si::after {
-      content: '';
-      position: absolute; left: 0; top: 50%;
-      transform: translateY(-50%);
-      height: 3.5px; width: 0%;
-      background: var(--terra);
-      border-radius: 2px;
-      transition: width .55s cubic-bezier(.16,1,.3,1);
-    }
-    .si.struck::after { width: 100%; }
-    .si-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px; font-weight: 400; line-height: 1.35;
+      font-size: clamp(22px, 6.5vw, 64px);
+      letter-spacing: .01em;
       color: rgba(255,255,255,.28);
-      margin-left: auto; text-align: right;
-      max-width: 150px; flex-shrink: 0;
-      padding-left: 12px;
+      white-space: nowrap;
+      display: inline-block;
+      position: relative;
+      line-height: 1.1;
+    }
+    /* line drawn THROUGH the word itself */
+    .si-word::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      height: 4px; width: 0%;
+      background: linear-gradient(to right, var(--terra), rgba(233,162,124,.55));
+      border-radius: 2px;
+      transition: width .65s cubic-bezier(.16,1,.3,1);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .si.struck .si-word::after { width: 100%; }
+
+    .si-aside {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px; font-weight: 400;
+      color: rgba(255,255,255,.22);
+      line-height: 1.4;
+      margin-top: 6px;
     }
 
-    .problem-quote {
-      background: rgba(233,162,124,.09);
-      border-left: 3px solid var(--terra);
-      border-radius: 0 8px 8px 0;
-      padding: 20px 22px;
-      font-size: 15px; line-height: 1.68;
-      color: var(--peach);
-      font-style: italic;
+    /* desktop: side by side */
+    @media (min-width: 700px) {
+      .si {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .si-aside {
+        text-align: right;
+        max-width: 200px;
+        flex-shrink: 0;
+        padding-left: 20px;
+        margin-top: 0;
+      }
     }
 
-    /* ─── SOLUTION ─── */
-    .solution-headline {
+    /* ─── ROLLING WORD SECTION ─── */
+    .rolling-section {
+      padding: 80px 24px;
+      display: flex; align-items: center;
+    }
+    .rolling-inner {
+      display: flex; flex-direction: column;
+      gap: 8px;
+    }
+    .rolling-prefix {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--mteal);
+    }
+    .rolling-word-wrap {
       font-family: 'Anton', sans-serif;
-      font-size: clamp(38px, 10vw, 72px);
-      line-height: .9; letter-spacing: -.01em;
-      margin-bottom: 16px;
+      font-size: clamp(36px, 12vw, 112px);
+      line-height: 1; letter-spacing: -.02em;
+      height: 1.15em;       /* tall enough to show the word */
+      overflow: visible;    /* do NOT clip horizontally */
+      /* clip only above/below the container, never left/right */
+      clip-path: inset(0 -2000px 0.1px -2000px);
+      position: relative;
     }
-    .solution-headline .teal { color: var(--teal); }
-    .solution-sub {
-      font-size: 17px; line-height: 1.65; color: var(--mteal);
-      max-width: 440px; margin-bottom: 44px;
+    .rolling-word {
+      display: block;
+      position: absolute; top: 0; left: 0;
+      opacity: 0;
+      transform: translateY(110%);
+      transition: opacity .45s ease, transform .55s cubic-bezier(.16,1,.3,1);
+      white-space: nowrap;
+      line-height: 1;
     }
+    .rolling-word.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .rolling-word.exit {
+      opacity: 0;
+      transform: translateY(-110%);
+    }
+    .rolling-word:nth-child(1) { color: var(--terra); }
+    .rolling-word:nth-child(2) { color: var(--teal);  }
+    .rolling-word:nth-child(3) { color: var(--peach); }
 
-    /* pillar cards */
-    .pillars { display: flex; flex-direction: column; gap: 14px; }
-    .pillar {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 14px;
-      padding: 24px 20px;
-      display: flex; gap: 18px; align-items: flex-start;
-      transition: border-color .3s, background .3s;
+    /* ─── RESEARCH PHASE ─── */
+    .research { background: rgba(0,0,0,.2); }
+
+    .phase-card {
+      background: rgba(14,137,146,.09);
+      border: 1px solid rgba(14,137,146,.22);
+      border-radius: 16px;
+      padding: 32px 28px;
+      margin-bottom: 32px;
     }
-    .pillar:hover {
-      border-color: rgba(14,137,146,.4);
-      background: rgba(14,137,146,.06);
+    .phase-card-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
     }
-    .pillar-icon { font-size: 28px; flex-shrink: 0; width: 36px; text-align: center; line-height: 1.1; }
-    .pillar-title {
+    .phase-card-label::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal); flex-shrink: 0;
+      animation: pulse 2.2s infinite;
+    }
+    .phase-card p {
+      font-size: 16px; line-height: 1.72; color: var(--mteal);
+    }
+    .phase-card p + p { margin-top: 14px; }
+    .phase-card strong { color: var(--cream); font-weight: 500; }
+
+    /* timeline */
+    .timeline { display: flex; flex-direction: column; }
+    .tl-item {
+      display: flex; gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-dot {
+      display: flex; flex-direction: column; align-items: center;
+      flex-shrink: 0; width: 20px; padding-top: 3px;
+    }
+    .tl-dot-circle {
+      width: 10px; height: 10px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .tl-dot-line {
+      width: 1px; flex: 1;
+      background: rgba(255,255,255,.1);
+      margin-top: 5px;
+    }
+    .tl-item:last-child .tl-dot-line { display: none; }
+    .tl-title {
       font-family: 'Anton', sans-serif;
       font-size: 17px; letter-spacing: .03em;
-      margin-bottom: 5px;
+      color: var(--cream); margin-bottom: 5px;
     }
-    .pillar-desc { font-size: 14px; line-height: 1.55; color: var(--mteal); }
-
-    /* ─── HOW IT WORKS ─── */
-    .how { background: var(--teal); }
-    .how .section-label { color: rgba(13,49,58,.6); }
-    .how-headline {
-      font-family: 'Anton', sans-serif;
-      font-size: clamp(38px, 10vw, 72px);
-      line-height: .9; letter-spacing: -.01em;
-      color: var(--navy); margin-bottom: 48px;
+    .tl-desc {
+      font-size: 14px; line-height: 1.6; color: var(--mteal);
     }
-    .steps { display: flex; flex-direction: column; }
-    .step {
-      display: flex; gap: 20px;
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(13,49,58,.18);
-    }
-    .step:last-child { border-bottom: none; }
-    .step-num {
-      font-family: 'Anton', sans-serif; font-size: 52px;
-      color: rgba(13,49,58,.18); line-height: 1;
-      flex-shrink: 0; width: 58px;
-      padding-top: 3px;
-    }
-    .step-title {
-      font-family: 'Anton', sans-serif;
-      font-size: 22px; letter-spacing: .03em;
-      color: var(--navy); margin-bottom: 7px;
-    }
-    .step-desc { font-size: 15px; line-height: 1.58; color: rgba(13,49,58,.72); }
-    .step-chip {
-      display: inline-block; margin-top: 10px;
+    .tl-desc strong { color: var(--cream); font-weight: 500; }
+    .tl-chip {
+      display: inline-block; margin-top: 8px;
       font-family: 'Space Mono', monospace;
-      font-size: 9px; letter-spacing: .13em; text-transform: uppercase;
-      background: rgba(13,49,58,.12); color: var(--navy);
-      padding: 4px 11px; border-radius: 20px;
+      font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+      background: rgba(233,162,124,.12); color: var(--terra);
+      padding: 4px 10px; border-radius: 20px;
     }
 
-    /* ─── WHY NOW ─── */
-    .why-headline {
-      font-family: 'Anton', sans-serif;
-      font-size: clamp(38px, 10vw, 72px);
-      line-height: .9; letter-spacing: -.01em;
+    /* ─── AMBI ─── */
+    .ambi { background: var(--teal); }
+    .ambi .section-label   { color: rgba(13,49,58,.55); }
+    .ambi .section-headline { color: var(--navy); }
+    .ambi .section-sub { color: rgba(13,49,58,.68); }
+    .ambi .section-sub strong { color: var(--navy); }
+
+    .ambi-dims {
+      display: flex; flex-direction: column; gap: 14px;
       margin-bottom: 36px;
     }
-
-    .transparency-box {
-      background: rgba(14,137,146,.09);
-      border: 1px solid rgba(14,137,146,.24);
-      border-radius: 14px;
-      padding: 28px 24px;
-      margin-bottom: 36px;
+    .ambi-dim {
+      background: rgba(13,49,58,.1);
+      border: 1px solid rgba(13,49,58,.15);
+      border-radius: 12px;
+      padding: 22px 20px;
+      display: flex; gap: 18px; align-items: flex-start;
+      transition: background .25s;
     }
-    .transparency-box h3 {
+    .ambi-dim:hover { background: rgba(13,49,58,.16); }
+    .ambi-icon { font-size: 26px; flex-shrink: 0; width: 34px; text-align: center; }
+    .ambi-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 17px; letter-spacing: .03em;
+      color: var(--navy); margin-bottom: 5px;
+    }
+    .ambi-desc { font-size: 14px; line-height: 1.58; color: rgba(13,49,58,.65); }
+    .future-tag {
+      display: inline-block; margin-top: 7px;
       font-family: 'Space Mono', monospace;
-      font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
-      color: var(--teal); margin-bottom: 14px;
+      font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+      background: rgba(13,49,58,.12); color: rgba(13,49,58,.5);
+      padding: 3px 9px; border-radius: 20px;
+      border: 1px dashed rgba(13,49,58,.25);
     }
-    .transparency-box p {
-      font-size: 15px; line-height: 1.67; color: var(--mteal);
-    }
-    .transparency-box p + p { margin-top: 12px; }
-    .transparency-box strong { color: var(--cream); }
 
-    /* fact grid */
-    .facts {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    .ambi-footer {
+      background: rgba(13,49,58,.12);
+      border-radius: 12px;
+      padding: 22px 20px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
     }
-    .fact {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 12px; padding: 18px 16px;
+    @media (min-width: 600px) {
+      .ambi-footer { grid-template-columns: repeat(3, 1fr); }
     }
-    .fact-icon { font-size: 22px; margin-bottom: 9px; }
-    .fact-title {
-      font-family: 'Anton', sans-serif; font-size: 15px;
-      color: var(--cream); margin-bottom: 4px;
+    .ambi-meta-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(13,49,58,.5); margin-bottom: 5px;
     }
-    .fact-desc { font-size: 12px; line-height: 1.42; color: var(--mteal); }
+    .ambi-meta-value {
+      font-family: 'Anton', sans-serif;
+      font-size: 20px; color: var(--navy); line-height: 1;
+    }
+    .ambi-meta-note {
+      font-size: 12px; line-height: 1.45;
+      color: rgba(13,49,58,.55); margin-top: 4px;
+    }
 
     /* ─── FINAL CTA ─── */
     .cta-section {
-      background: linear-gradient(155deg, rgba(14,137,146,.14) 0%, var(--navy) 55%);
       text-align: center;
-      padding: 88px 24px 140px;
+      padding: 80px 24px 140px;
+      border-top: 1px solid rgba(255,255,255,.06);
     }
-    .cta-section .section-label { color: var(--terra); }
     .cta-headline {
       font-family: 'Anton', sans-serif;
-      font-size: clamp(46px, 12vw, 90px);
-      line-height: .88; letter-spacing: -.01em;
-      margin-bottom: 18px;
+      font-size: clamp(44px, 12vw, 88px);
+      line-height: .88; letter-spacing: -.015em;
+      margin-bottom: 20px;
     }
     .cta-headline .terra { color: var(--terra); }
     .cta-sub {
-      font-size: 16px; color: var(--mteal); line-height: 1.58;
-      max-width: 340px; margin: 0 auto 48px;
+      font-size: 16px; color: var(--mteal);
+      line-height: 1.62; max-width: 360px;
+      margin: 0 auto 48px;
     }
-    .cta-buttons {
-      display: flex; flex-direction: column; gap: 14px;
-      max-width: 380px; margin: 0 auto;
-    }
-    .cta-chip {
-      display: inline-flex; align-items: center; gap: 7px;
+    .cta-wrap { max-width: 460px; margin: 0 auto; }
+    .cta-small {
+      margin-top: 24px;
       font-family: 'Space Mono', monospace;
       font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--mteal);
-      background: rgba(140,182,188,.1);
-      border: 1px solid rgba(140,182,188,.2);
-      padding: 7px 16px; border-radius: 20px;
-      margin-top: 22px;
+      color: rgba(255,255,255,.22); line-height: 1.9;
     }
-    .cta-btn-it {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      flex: 1; padding: 17px 28px;
-      border: 1.5px solid var(--terra); border-radius: 10px;
+
+    /* ── modern pill CTA button ── */
+    .btn-cta {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      width: 100%; padding: 24px 40px;
+      background: linear-gradient(135deg, #EDB08E 0%, var(--terra) 45%, #C97A52 100%);
+      color: var(--navy);
+      border: none; border-radius: 100px;
       font-family: 'Anton', sans-serif;
-      font-size: 20px; letter-spacing: .05em; text-transform: uppercase;
-      color: var(--terra); background: transparent;
+      font-size: 22px; letter-spacing: .06em; text-transform: uppercase;
       cursor: pointer; text-decoration: none;
-      transition: background .2s, color .2s;
+      position: relative; overflow: hidden;
+      box-shadow:
+        0 8px 32px rgba(233,162,124,.45),
+        0 0 0 0 rgba(233,162,124,.25);
+      transition: transform .2s cubic-bezier(.16,1,.3,1),
+                  box-shadow .2s cubic-bezier(.16,1,.3,1);
+      animation: ctaGlow 3.5s ease-in-out infinite;
     }
-    .cta-btn-it:hover { background: rgba(233,162,124,.1); }
+    @keyframes ctaGlow {
+      0%, 100% { box-shadow: 0 8px 32px rgba(233,162,124,.42), 0 0 0 0   rgba(233,162,124,.20); }
+      50%       { box-shadow: 0 8px 48px rgba(233,162,124,.60), 0 0 0 14px rgba(233,162,124,.0); }
+    }
+
+    /* shimmer sweep */
+    .btn-cta::before {
+      content: '';
+      position: absolute; top: 0; left: -120%;
+      width: 55%; height: 100%;
+      background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.28) 50%, transparent 70%);
+      transform: skewX(-12deg);
+      animation: btnShimmer 3.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes btnShimmer {
+      0%        { left: -120%; }
+      45%, 100% { left: 170%;  }
+    }
+
+    .btn-cta:hover  { transform: translateY(-3px); box-shadow: 0 18px 52px rgba(233,162,124,.58); }
+    .btn-cta:active { transform: scale(.98); }
+
+    .btn-cta-text  { position: relative; z-index: 1; }
+    .btn-cta-arrow {
+      position: relative; z-index: 1;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      background: rgba(13,49,58,.18);
+      border-radius: 50%;
+      transition: transform .2s cubic-bezier(.16,1,.3,1);
+      flex-shrink: 0;
+    }
+    .btn-cta:hover .btn-cta-arrow { transform: translateX(5px); }
+    .btn-cta-arrow svg { width: 16px; height: 16px; }
 
     /* ─── FOOTER ─── */
     footer {
       padding: 28px 24px;
-      border-top: 1px solid rgba(255,255,255,.06);
+      border-top: 1px solid rgba(255,255,255,.05);
       text-align: center;
     }
     footer p {
       font-family: 'Space Mono', monospace;
       font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
-      color: rgba(255,255,255,.2); line-height: 1.8;
+      color: rgba(255,255,255,.18); line-height: 1.9;
     }
-    footer a { color: var(--mteal); text-decoration: none; }
+    footer a { color: var(--mteal); }
     footer a:hover { text-decoration: underline; }
 
     /* ─── RESPONSIVE ─── */
     @media (min-width: 600px) {
-      nav  { padding: 22px 48px; }
-      section { padding: 100px 48px; }
-      .hero-cta { flex-direction: row; }
-      .facts { grid-template-columns: repeat(4, 1fr); }
-      .cta-buttons {
-        flex-direction: row;
-        align-items: stretch;
-      }
-      .btn-primary { flex: 1; }
-      .cta-btn-it  { flex: 1; }
+      nav { padding: 22px 48px; }
+      section { padding: 104px 48px; }
+      .strike-section { padding: 104px 48px; }
+      .rolling-section { padding: 104px 48px; }
     }
-
     @media (min-width: 1024px) {
       nav { padding: 26px 96px; }
       section { padding: 120px 96px; }
-      .section-inner { max-width: 720px; }
+      .strike-section { padding: 120px 96px; }
+      .rolling-section { padding: 80px 96px; }
       .cta-section { padding: 120px 96px 180px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     STICKY CTA BAR (appears after hero scrolls away)
-     ═══════════════════════════════════════════ -->
+<!-- STICKY BAR -->
 <div id="stickyBar">
-  <a href="https://forms.gle/9kgTMELcSCvf83f7A" class="sb-btn en" target="_blank" rel="noopener noreferrer">
-    <span>🇬🇧</span> Take it in English
-  </a>
-  <a href="https://forms.gle/mfMW9vhQon4mBVNt8" class="sb-btn it" target="_blank" rel="noopener noreferrer">
-    <span>🇮🇹</span> Fallo in italiano
+  <a href="https://forms.gle/N6nrw7Vkoz6vjuh2A" class="sb-btn" target="_blank" rel="noopener noreferrer">
+    <span class="sb-btn-text">Take the questionnaire</span>
+    <span class="sb-btn-arrow">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </span>
   </a>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     NAV
-     ═══════════════════════════════════════════ -->
+<!-- NAV -->
 <nav>
-  <div class="logo">DARE <em>TO</em> DATE</div>
-  <div class="nav-badge">Research · 2026</div>
+  <div class="logo">ZAPHYR <em>PROJECT</em></div>
+  <div class="nav-badge">Early Access · 2026</div>
 </nav>
 
-<!-- ═══════════════════════════════════════════
-     HERO
-     ═══════════════════════════════════════════ -->
+<!-- ═══ HERO ═══ -->
 <section class="hero" id="hero">
-  <div class="hero-eyebrow">Anti-swipe movement · 2026</div>
+  <div class="hero-eyebrow">Personality-first dating · 2026</div>
 
   <h1 class="hero-headline">
-    YOUR<br>
-    <span class="outline">PHOTOS</span><br>
-    ARE NOT<br>
-    <span class="accent">YOU.</span>
+    TAKE<br>
+    THE <span class="teal">TEST.</span><br>
+    MEET YOUR<br>
+    <span class="terra">MATCHES.</span>
   </h1>
 
   <p class="hero-sub">
-    We're building a dating app that matches people on personality.
-    Not looks. Not who paid more.
-    <strong>Who you actually are.</strong>
+    You tell us who you are. We find who fits.
+    Then we get you in touch and set up real dates —
+    <strong>a table for two, at a venue near you.</strong>
   </p>
 
   <div class="hero-cta">
-    <a href="https://forms.gle/9kgTMELcSCvf83f7A" class="btn-primary" target="_blank" rel="noopener noreferrer">
-      <span class="btn-flag">🇬🇧</span> Take the questionnaire
-    </a>
-    <a href="https://forms.gle/mfMW9vhQon4mBVNt8" class="btn-secondary" target="_blank" rel="noopener noreferrer">
-      <span class="btn-flag">🇮🇹</span> In italiano
+    <a href="https://forms.gle/N6nrw7Vkoz6vjuh2A" class="btn-primary" target="_blank" rel="noopener noreferrer">
+      Take the questionnaire →
     </a>
   </div>
 
-  <div class="hero-stats">
-    <div class="stat">
-      <span class="stat-num">~10 min</span>
-      <span class="stat-label">to complete</span>
+  <div class="promise-strip">
+    <div class="promise-item">
+      <span class="promise-num">Step 01</span>
+      <span class="promise-text">You take<br>the test</span>
     </div>
-    <div class="stat-sep"></div>
-    <div class="stat">
-      <span class="stat-num">100%</span>
-      <span class="stat-label">anonymous</span>
+    <div class="promise-item">
+      <span class="promise-num">Step 02</span>
+      <span class="promise-text">We find<br>your matches</span>
     </div>
-    <div class="stat-sep"></div>
-    <div class="stat">
-      <span class="stat-num">Free</span>
-      <span class="stat-label">always</span>
+    <div class="promise-item">
+      <span class="promise-num">Step 03</span>
+      <span class="promise-text">We set<br>the table</span>
     </div>
   </div>
 
@@ -570,248 +685,283 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     PROBLEM
-     ═══════════════════════════════════════════ -->
-<section class="problem">
+<!-- ═══ STRIKETHROUGH ═══ -->
+<section class="strike-section">
   <div class="section-inner">
-    <div class="section-label reveal">The problem</div>
-    <h2 class="problem-headline reveal d1">
-      Dating apps<br>
-      are <span style="color:var(--terra)">broken.</span>
-    </h2>
-
-    <!-- animated strike-list -->
+    <div class="strike-label reveal">We're done with</div>
     <div class="strike-list" id="strikeList">
-      <div class="si">
-        <span>SWIPING</span>
-        <span class="si-desc">judging a human in 0.3 seconds</span>
+      <div class="si reveal d1">
+        <span class="si-word">ENDLESS SWIPING</span>
+        <span class="si-aside">judging someone in a fraction of a second</span>
       </div>
-      <div class="si">
-        <span>PAYING</span>
-        <span class="si-desc">roses, boosts, superlikes — pay to be seen</span>
+      <div class="si reveal d2">
+        <span class="si-word">MEANINGLESS CHATS</span>
+        <span class="si-aside">the same three openers, the same nowhere conversations</span>
       </div>
-      <div class="si">
-        <span>POSING</span>
-        <span class="si-desc">curated photos over actual personality</span>
-      </div>
-      <div class="si">
-        <span>GHOSTING</span>
-        <span class="si-desc">conversations that vanish into silence</span>
+      <div class="si reveal d3">
+        <span class="si-word">MANUFACTURED ATTRACTION</span>
+        <span class="si-aside">curated photos, borrowed bios, identity as performance</span>
       </div>
     </div>
-
-    <blockquote class="problem-quote reveal d2">
-      "The average dating app user spends 90 minutes a day swiping — and still feels more lonely than before they downloaded the app."
-    </blockquote>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     SOLUTION
-     ═══════════════════════════════════════════ -->
-<section class="solution">
+<!-- ═══ ROLLING WORD ═══ -->
+<section class="rolling-section">
+  <div class="rolling-inner">
+    <span class="rolling-prefix reveal">Here it's about</span>
+    <div class="rolling-word-wrap reveal d1" id="rollingWrap">
+      <span class="rolling-word" id="rw0">COMPATIBILITY</span>
+      <span class="rolling-word" id="rw1">PERSONALITY</span>
+      <span class="rolling-word" id="rw2">CONNECTION</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESEARCH PHASE ═══ -->
+<section class="research">
   <div class="section-inner">
-    <div class="section-label reveal">Our answer</div>
-    <h2 class="solution-headline reveal d1">
-      Match on<br>
-      <span class="teal">who you are.</span><br>
-      Not what you look like.
+    <div class="section-label reveal">Where we are</div>
+    <h2 class="section-headline reveal d1">
+      There is no app yet.<br>
+      <span style="color:var(--teal)">That's the point.</span>
     </h2>
-    <p class="solution-sub reveal d2">
-      We built a personality assessment that identifies how you think, how you love, and what you need in a partner. Then we do the matching — algorithmically, without photos, without paid placement.
+    <p class="section-sub reveal d2">
+      Before we build anything, we want to understand who's out there — and whether the concept is of interest. <strong>You're part of that foundation.</strong>
     </p>
 
-    <div class="pillars">
-      <div class="pillar reveal d1">
-        <div class="pillar-icon">🧠</div>
+    <div class="phase-card reveal d2">
+      <div class="phase-card-label">Live — Research &amp; Feasibility Phase</div>
+      <p>
+        Dating has become an exercise in consumption. Swipe through hundreds of faces. Exchange the same hollow openers. Build a version of yourself optimised for a thumbnail. Pay to be seen by people you haven't met yet. It keeps people busy. It rarely gets them anywhere real.
+      </p>
+      <p>
+        We think genuine compatibility — the kind that leads to actual intimacy, actual conversation, actual relationships — deserves more than an algorithm tuned for engagement. It deserves one built for fit.
+      </p>
+      <p>
+        That's what Zaphyr is building. <strong>For now, there is no app — this is a proof of concept.</strong> We are collecting personality profiles to validate the model. Once the pool is ready, we will identify who belongs together and reach out directly by WhatsApp or email, putting people in touch and arranging a first date at a real venue. No platform to download. No ghosting. No performance.
+      </p>
+    </div>
+
+    <div class="timeline reveal d3">
+      <div class="tl-item">
+        <div class="tl-dot">
+          <div class="tl-dot-circle" style="background:var(--teal)"></div>
+          <div class="tl-dot-line"></div>
+        </div>
         <div>
-          <div class="pillar-title">Who you are, alone</div>
-          <div class="pillar-desc">Your core personality traits — how you process the world, make decisions, and handle ambiguity under pressure.</div>
+          <div class="tl-title">Now — You take the questionnaire</div>
+          <div class="tl-desc">
+            Complete the AMBI personality questionnaire. 10–15 minutes. We collect your contact preference (WhatsApp or email) alongside your results — <strong>and we send you your interpreted profile.</strong>
+          </div>
+          <span class="tl-chip">Active</span>
         </div>
       </div>
-      <div class="pillar reveal d2">
-        <div class="pillar-icon">💬</div>
+      <div class="tl-item">
+        <div class="tl-dot">
+          <div class="tl-dot-circle" style="background:rgba(255,255,255,.25)"></div>
+          <div class="tl-dot-line"></div>
+        </div>
         <div>
-          <div class="pillar-title">Who you are in relationships</div>
-          <div class="pillar-desc">Your attachment style, communication patterns, and how you show up for people you genuinely care about.</div>
+          <div class="tl-title">Soon — We analyse &amp; build compatibility profiles</div>
+          <div class="tl-desc">
+            Once we reach a critical pool size, we analyze compatibility among all participants and identify the strongest matches.
+          </div>
         </div>
       </div>
-      <div class="pillar reveal d3">
-        <div class="pillar-icon">🌿</div>
+      <div class="tl-item">
+        <div class="tl-dot">
+          <div class="tl-dot-circle" style="background:rgba(255,255,255,.25)"></div>
+          <div class="tl-dot-line"></div>
+        </div>
         <div>
-          <div class="pillar-title">What you actually love</div>
-          <div class="pillar-desc">Your passions, interests, and the things that make you light up — the stuff you'd actually talk about on a first date.</div>
+          <div class="tl-title">Then — We contact you with your results</div>
+          <div class="tl-desc">
+            We reach out directly — WhatsApp or email — with your top matches and a proposed first date at a partner venue. You don't chase anyone. <strong>We bring it to you.</strong>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">
+          <div class="tl-dot-circle" style="background:rgba(255,255,255,.25)"></div>
+        </div>
+        <div>
+          <div class="tl-title">Finally — A real first date</div>
+          <div class="tl-desc">
+            A table for two. A venue chosen for you both. Two people who were introduced because the data said they belong in the same room — not because one of them paid to appear at the top of a feed.
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     HOW IT WORKS
-     ═══════════════════════════════════════════ -->
-<section class="how">
+<!-- ═══ AMBI TEST ═══ -->
+<section class="ambi">
   <div class="section-inner">
-    <div class="section-label reveal">How it works</div>
-    <h2 class="how-headline reveal d1">Three steps.<br>One real date.</h2>
+    <div class="section-label reveal">The questionnaire</div>
+    <h2 class="section-headline reveal d1">Meet AMBI.</h2>
+    <p class="section-sub reveal d2">
+      The AMBI is a multi-dimensional personality inventory designed to go beneath the surface. Most personality tests tell you what type you are. AMBI maps <strong>how you work</strong> — alone, with others, and in the life you've built — so we can find someone who genuinely complements you.
+    </p>
 
-    <div class="steps">
-      <div class="step reveal d1">
-        <div class="step-num">01</div>
+    <div class="ambi-dims reveal d2">
+      <div class="ambi-dim">
+        <div class="ambi-icon">🧠</div>
         <div>
-          <div class="step-title">You take the questionnaire</div>
-          <div class="step-desc">A 10–15 minute personality assessment. No photo required. No social profiles. No judgement. Just honest answers about who you are.</div>
-          <span class="step-chip">~10 min · completely anonymous</span>
+          <div class="ambi-title">Who you are as an individual</div>
+          <div class="ambi-desc">Your core personality structure — how you process the world, where you draw energy from, how you make decisions, how you handle complexity and uncertainty.</div>
         </div>
       </div>
-      <div class="step reveal d2">
-        <div class="step-num">02</div>
+      <div class="ambi-dim">
+        <div class="ambi-icon">🤝</div>
         <div>
-          <div class="step-title">We find your real matches</div>
-          <div class="step-desc">Our algorithm identifies compatibility based purely on your results — not your profile photo. Couples who actually work, not just couples who photograph well.</div>
-          <span class="step-chip">personality-based · no pay-to-win</span>
+          <div class="ambi-title">Who you are in relationships</div>
+          <div class="ambi-desc">Your relational patterns — how you attach, how you communicate when things are hard, what you need to feel safe, and how you show care.</div>
         </div>
       </div>
-      <div class="step reveal d3">
-        <div class="step-num">03</div>
+      <div class="ambi-dim">
+        <div class="ambi-icon">🌿</div>
         <div>
-          <div class="step-title">We arrange the first date</div>
-          <div class="step-desc">No painful chat loops. No flaking. We handle the logistics — booking a table at a venue nearby. You just show up and be yourself.</div>
-          <span class="step-chip">real venue · no ghosting trap</span>
+          <div class="ambi-title">What you love and how you live</div>
+          <div class="ambi-desc">Your interests, values, and the texture of your daily life — because compatibility isn't only about psychology. It's also about actually enjoying each other's company.</div>
+          <span class="future-tag">Future feature</span>
         </div>
+      </div>
+    </div>
+
+    <div class="ambi-footer reveal d3">
+      <div class="ambi-meta">
+        <div class="ambi-meta-label">Time</div>
+        <div class="ambi-meta-value">10–15 min</div>
+        <div class="ambi-meta-note">One sitting, no login required</div>
+      </div>
+      <div class="ambi-meta">
+        <div class="ambi-meta-label">Data</div>
+        <div class="ambi-meta-value">Decoupled</div>
+        <div class="ambi-meta-note">Contact info stored separately from your personality profile</div>
+      </div>
+      <div class="ambi-meta">
+        <div class="ambi-meta-label">Cost</div>
+        <div class="ambi-meta-value">Free</div>
+        <div class="ambi-meta-note">Always. No subscription, ever.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     WHY NOW / TRANSPARENCY
-     ═══════════════════════════════════════════ -->
-<section class="why">
-  <div class="section-inner">
-    <div class="section-label reveal">Why now</div>
-    <h2 class="why-headline reveal d1">
-      You're<br>
-      <span style="color:var(--terra)">shaping</span><br>
-      what comes next.
-    </h2>
-
-    <div class="transparency-box reveal d2">
-      <h3>Full transparency</h3>
-      <p>We're in the <strong>research phase</strong>. There is no app yet. No subscription, no ads, no tricks — zero.</p>
-      <p>We're collecting personality questionnaires to build the data foundation that will power our matching algorithm. <strong>Your answers directly determine how the matching works.</strong></p>
-      <p>When we launch, everyone who participated gets <strong>early access</strong> — and their personality profile is already in the system.</p>
-    </div>
-
-    <div class="facts">
-      <div class="fact reveal d1">
-        <div class="fact-icon">🔒</div>
-        <div class="fact-title">Anonymous</div>
-        <div class="fact-desc">No name or photo required to take part</div>
-      </div>
-      <div class="fact reveal d2">
-        <div class="fact-icon">⚡</div>
-        <div class="fact-title">10 minutes</div>
-        <div class="fact-desc">That's genuinely all it takes</div>
-      </div>
-      <div class="fact reveal d3">
-        <div class="fact-icon">🚫</div>
-        <div class="fact-title">No spam</div>
-        <div class="fact-desc">Your results sent once. That's it.</div>
-      </div>
-      <div class="fact reveal d4">
-        <div class="fact-icon">🎯</div>
-        <div class="fact-title">Real impact</div>
-        <div class="fact-desc">You shape the algorithm — directly</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     FINAL CTA
-     ═══════════════════════════════════════════ -->
+<!-- ═══ FINAL CTA ═══ -->
 <section class="cta-section">
-  <div class="section-label reveal">Ready?</div>
+  <div class="section-label reveal" style="color:var(--terra)">Start here</div>
+
   <h2 class="cta-headline reveal d1">
-    10 minutes.<br>
-    <span class="terra">Your personality.</span><br>
-    A real match.
+    Ten minutes.<br>
+    <span class="terra">Real matches.</span><br>
+    We'll do the rest.
   </h2>
+
   <p class="cta-sub reveal d2">
-    Pick your language and take the questionnaire.
-    Anonymous. Free. About 10 minutes.
+    Take the AMBI questionnaire. We'll handle the matching, the introductions, and the date.
   </p>
 
-  <div class="cta-buttons reveal d3">
-    <a href="https://forms.gle/9kgTMELcSCvf83f7A" class="btn-primary" target="_blank" rel="noopener noreferrer">
-      <span class="btn-flag">🇬🇧</span> English
+  <div class="cta-wrap reveal d3">
+    <a href="https://forms.gle/N6nrw7Vkoz6vjuh2A" class="btn-cta" target="_blank" rel="noopener noreferrer">
+      <span class="btn-cta-text">Take the questionnaire</span>
+      <span class="btn-cta-arrow">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </span>
     </a>
-    <a href="https://forms.gle/mfMW9vhQon4mBVNt8" class="cta-btn-it" target="_blank" rel="noopener noreferrer">
-      <span class="btn-flag">🇮🇹</span> Italiano
-    </a>
-  </div>
-
-  <div style="text-align:center;" class="reveal d4">
-    <span class="cta-chip">⏱ 10 min &nbsp;·&nbsp; anonymous &nbsp;·&nbsp; free forever</span>
+    <p class="cta-small">
+      10–15 minutes &nbsp;·&nbsp; Free &nbsp;·&nbsp; Contact info decoupled from your profile<br>
+      We reach out by WhatsApp or email when your matches are ready
+    </p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     FOOTER
-     ═══════════════════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
   <p>
-    Dare to Date &nbsp;·&nbsp; Research Phase 2026<br>
+    Zaphyr Project &nbsp;·&nbsp; Research &amp; Feasibility Phase · 2026<br>
     Questions? <a href="mailto:personality.matching@gmail.com">personality.matching@gmail.com</a>
   </p>
 </footer>
 
-<!-- ═══════════════════════════════════════════
-     JAVASCRIPT
-     ═══════════════════════════════════════════ -->
 <script>
   /* ── Scroll reveal ── */
-  const revealObs = new IntersectionObserver(
+  const obs = new IntersectionObserver(
     entries => entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObs.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
     }),
-    { threshold: 0.12 }
+    { threshold: 0.1 }
   );
-  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
   /* ── Strikethrough animation ── */
   const strikeList = document.getElementById('strikeList');
   if (strikeList) {
-    const strikeObs = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.querySelectorAll('.si').forEach((item, i) => {
-            setTimeout(() => item.classList.add('struck'), i * 220 + 180);
-          });
-          strikeObs.unobserve(e.target);
-        }
-      }),
-      { threshold: 0.25 }
-    );
-    strikeObs.observe(strikeList);
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        strikeList.querySelectorAll('.si').forEach((el, i) => {
+          setTimeout(() => el.classList.add('struck'), i * 250 + 200);
+        });
+      }
+    }, { threshold: 0.25 }).observe(strikeList);
   }
 
-  /* ── Sticky CTA bar: show once hero is out of view ── */
+  /* ── Rolling word ── */
+  const words  = ['rw0', 'rw1', 'rw2'].map(id => document.getElementById(id));
+  const wrap   = document.getElementById('rollingWrap');
+  let current  = 0;
+  let started  = false;
+
+  function nextWord() {
+    const prev = current;
+    current    = (current + 1) % words.length;
+    words[prev].classList.remove('active');
+    words[prev].classList.add('exit');
+    setTimeout(() => words[prev].classList.remove('exit'), 500);
+    words[current].classList.add('active');
+  }
+
+  function startRolling() {
+    if (started) return;
+    started = true;
+    words[0].classList.add('active');
+    setInterval(nextWord, 2200);
+  }
+
+  if (wrap) {
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) startRolling();
+    }, { threshold: 0.5 }).observe(wrap);
+  }
+
+  /* ── Sticky bar: show between hero and final CTA ── */
   const hero    = document.getElementById('hero');
-  const stickyBar = document.getElementById('stickyBar');
-  if (hero && stickyBar) {
-    const heroObs = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        stickyBar.classList.toggle('show', !e.isIntersecting);
-      }),
-      { threshold: 0.08 }
-    );
-    heroObs.observe(hero);
+  const bar     = document.getElementById('stickyBar');
+  const ctaSection = document.querySelector('.cta-section');
+
+  let heroGone = false;
+  let ctaVisible = false;
+
+  function updateBar() {
+    bar.classList.toggle('show', heroGone && !ctaVisible);
+  }
+
+  if (hero && bar) {
+    new IntersectionObserver(entries => {
+      heroGone = !entries[0].isIntersecting;
+      updateBar();
+    }, { threshold: 0.08 }).observe(hero);
+  }
+
+  if (ctaSection && bar) {
+    new IntersectionObserver(entries => {
+      ctaVisible = entries[0].isIntersecting;
+      updateBar();
+    }, { threshold: 0.15 }).observe(ctaSection);
   }
 </script>
 </body>
