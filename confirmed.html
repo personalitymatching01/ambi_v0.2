@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account confirmed · Zaphyr</title>
+  <meta name="description" content="Your Zaphyr account is confirmed.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D313A;
+      --teal: #0E8992;
+      --teal-light: #8CB6BC;
+      --sand: #E9A27C;
+      --white: #FFFFFF;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .wrap { width: 100%; max-width: 460px; text-align: center; }
+    .wordmark {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 30px;
+      letter-spacing: 8px;
+      color: var(--white);
+      margin: 0 0 40px;
+    }
+    .check {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      border: 1.5px solid var(--teal);
+      background: rgba(14, 137, 146, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+    }
+    .check span { font-size: 40px; color: var(--sand); line-height: 1; }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin: 0 0 10px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 44px;
+      margin: 0 0 18px;
+      color: var(--white);
+    }
+    .body {
+      font-size: 16px;
+      line-height: 25px;
+      color: var(--teal-light);
+      margin: 0 auto 36px;
+      max-width: 380px;
+    }
+    .body strong { color: var(--sand); font-weight: 500; }
+    .slogan {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--sand);
+      margin: 0 0 8px;
+    }
+    .footer {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.3px;
+      color: rgba(140, 182, 188, 0.6);
+      margin: 40px 0 0;
+    }
+    @media (max-width: 380px) {
+      h1 { font-size: 34px; line-height: 38px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="wordmark">ZAPHYR</p>
+
+    <div class="check"><span>&#10003;</span></div>
+
+    <p class="eyebrow">You're all set</p>
+    <h1>Account confirmed</h1>
+    <p class="body">
+      Your email is verified and your account is active. Open the <strong>Zaphyr</strong> app and
+      <strong>log in</strong> to pick up where you left off.
+    </p>
+
+    <p class="slogan">Personality first. Chemistry follows.</p>
+    <p class="footer">You can close this tab.</p>
+  </main>
+</body>
+</html>
