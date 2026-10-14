@@ -5,89 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Account confirmed · Zaphyr</title>
   <meta name="description" content="Your Zaphyr account is confirmed.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Fonts are self-hosted (assets/fonts/) so no request leaves this origin. -->
+  <link rel="preload" href="assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/cormorant-garamond-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="assets/fonts/fonts.css" rel="stylesheet">
   <style>
+    /* Brand tokens, copied from zaphyr_mobile/constants/design.ts (Palette, Type,
+       Radius, Shadow). Hellblau #A0BEDA, Schokobraun #34211B, white. */
     :root {
-      --navy: #0D313A;
-      --teal: #0E8992;
-      --teal-light: #8CB6BC;
-      --sand: #E9A27C;
-      --white: #FFFFFF;
+      --bg: #FFFFFF;
+      --text: #34211B;           /* 15.2:1 on white */
+      --text-secondary: #7D716D; /* 4.7:1 on white */
+      --accent-soft: #A0BEDA;    /* Hellblau */
+      --tint: #E4EDF5;           /* Hellblau at 28% on white */
+      --hairline: #E1DEDD;
+      --shadow: 0 6px 16px rgba(52, 33, 27, 0.08);
+      --radius-xl: 24px;
+      --radius-pill: 999px;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     body {
-      background-color: var(--navy);
-      color: var(--white);
+      background: var(--bg);
+      color: var(--text);
       font-family: 'DM Sans', -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 32px 24px;
     }
-    .wrap { width: 100%; max-width: 460px; text-align: center; }
+    .wrap { width: 100%; max-width: 440px; text-align: center; }
     .wordmark {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 30px;
+      font-weight: 500;
+      font-size: 28px;
       letter-spacing: 8px;
-      color: var(--white);
-      margin: 0 0 40px;
+      padding-left: 8px; /* balances the trailing letter-spacing */
+      color: var(--text);
+      margin: 0 0 32px;
+    }
+    .card {
+      background: var(--bg);
+      border-radius: var(--radius-xl);
+      padding: 40px 32px 36px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--hairline);
     }
     .check {
-      width: 84px;
-      height: 84px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      border: 1.5px solid var(--teal);
-      background: rgba(14, 137, 146, 0.12);
+      background: var(--tint);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 28px;
+      margin: 0 auto 24px;
     }
-    .check span { font-size: 40px; color: var(--sand); line-height: 1; }
+    .check-inner {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .check svg { width: 28px; height: 28px; }
     .eyebrow {
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--teal-light);
-      margin: 0 0 10px;
+      display: inline-block;
+      font-size: 13px;
+      line-height: 18px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--tint);
+      border-radius: var(--radius-pill);
+      padding: 5px 12px;
+      margin: 0 0 14px;
     }
     h1 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 500;
-      font-size: 40px;
-      line-height: 44px;
-      margin: 0 0 18px;
-      color: var(--white);
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 38px;
+      letter-spacing: -0.5px;
+      margin: 0 0 12px;
+      color: var(--text);
     }
     .body {
-      font-size: 16px;
+      font-size: 17px;
       line-height: 25px;
-      color: var(--teal-light);
-      margin: 0 auto 36px;
-      max-width: 380px;
+      color: var(--text-secondary);
+      margin: 0 auto;
+      max-width: 360px;
     }
-    .body strong { color: var(--sand); font-weight: 500; }
+    .body strong { color: var(--text); font-weight: 600; }
     .slogan {
       font-family: 'Cormorant Garamond', Georgia, serif;
       font-style: italic;
-      font-size: 19px;
-      color: var(--sand);
-      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 26px;
+      color: var(--text);
+      margin: 32px 0 6px;
     }
     .footer {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      letter-spacing: 0.3px;
-      color: rgba(140, 182, 188, 0.6);
-      margin: 40px 0 0;
+      font-size: 13px;
+      line-height: 18px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin: 0;
     }
-    @media (max-width: 380px) {
-      h1 { font-size: 34px; line-height: 38px; }
+    /* Phones: no card chrome, the page itself is the white surface. */
+    @media (max-width: 520px) {
+      body { align-items: flex-start; padding-top: 56px; }
+      .card { box-shadow: none; border: none; padding: 0; border-radius: 0; }
+      h1 { font-size: 28px; line-height: 34px; }
     }
   </style>
 </head>
@@ -95,14 +128,20 @@
   <main class="wrap">
     <p class="wordmark">ZAPHYR</p>
 
-    <div class="check"><span>&#10003;</span></div>
+    <div class="card">
+      <div class="check" aria-hidden="true">
+        <div class="check-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#34211B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </div>
+      </div>
 
-    <p class="eyebrow">You're all set</p>
-    <h1>Account confirmed</h1>
-    <p class="body">
-      Your email is verified and your account is active. Open the <strong>Zaphyr</strong> app and
-      <strong>log in</strong> to pick up where you left off.
-    </p>
+      <p class="eyebrow">You're all set</p>
+      <h1>Account confirmed</h1>
+      <p class="body">
+        Your email is verified and your account is active. Open the <strong>Zaphyr</strong> app and
+        <strong>log in</strong> to pick up where you left off.
+      </p>
+    </div>
 
     <p class="slogan">Personality first. Chemistry follows.</p>
     <p class="footer">You can close this tab.</p>
